@@ -1,7 +1,6 @@
 module holder(height, width, depth) {
-    translate([0,0,height-20])
-      cube([width, 3, 20]);
-    //cube([width, depth, 3]);
+    cube([width, 3, height]);
+    cube([width, depth, 3]);
 
     let(hyp = sqrt(depth^2 + height^2)){
         let(foot_length = 15){
@@ -48,4 +47,4 @@ module holder_with_hooks(height, width, depth) {
     }
 }
 
-holder_with_hooks(90, 80, 30);
+holder_with_hooks(90, 130, 30);
