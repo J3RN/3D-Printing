@@ -1,30 +1,20 @@
 include <roundedcube.scad>
 
-translate([75,0,3])
-rotate([-90,0,90])
-linear_extrude(155)
-difference(){
-    polygon([[0,0], [131, 0], [0, 24]]);
-    translate([3, 3, 0])
-    scale([.7,.7,1])
-        polygon([[0,0], [131, 0], [0, 24]]);
+// backplate
+translate([-80, 0, 0]){
+    let (length = 155) {
+        cube([length, 130, 3]);
+        // hanger
+        translate([0, .5, -23]) {
+            rotate([10, 0, 0]) {
+                cube([length, 131, 3]);
+            }
+            translate([0,-.5,.25])
+            cube([length, 3, 23]);
+        }
+    }
 }
 
-// backplate
-//translate([-80, 0, 0]){
-//    let (length = 155) {
-//        cube([length, 130, 3]);
-//        // hanger
-//        translate([0, .5, -23]) {
-//            rotate([10, 0, 0]) {
-//                cube([length, 131, 3]);
-//            }
-//            translate([0,-.5,.25])
-//            cube([length, 3, 23]);
-//        }
-//    }
-//}
-//
 // angled backplate
 rotate([0,0,-155.5]) {
     translate([-10.75, -73, 0]) {
@@ -86,7 +76,7 @@ module hook() {
 
 let (num_hooks = 5) {
     rotate([10,0,0]){
-        translate([-50,130,-29]) {
+        translate([-50,130,-32]) {
             rotate([0,0,180])
                 hook();
 
