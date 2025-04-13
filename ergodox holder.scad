@@ -1,4 +1,4 @@
-include <roundedcube.scad>
+include <hookset.scad>
 
 // backplate
 translate([-80, 0, 0]){
@@ -12,10 +12,15 @@ translate([-80, 0, 0]){
             translate([0,-.5,.25])
             cube([length, 3, 23]);
         }
+
+        // hooks
+        translate([length-125, 122, -5])
+            rotate([-80,0,0])
+                hookset(5);
     }
 }
 
-// angled backplate
+// angled thumb cluster backplate
 rotate([0,0,-155.5]) {
     translate([-10.75, -73, 0]) {
         let (r = 12, h = 3) {
@@ -28,7 +33,6 @@ rotate([0,0,-155.5]) {
         }
     }
 }
-
 
 // Curvy bottom bit
 let (height = 20) {
@@ -54,47 +58,4 @@ let (height = 20) {
       rotate_extrude(angle=25.5, $fn=100)
         translate([10,0,0])
           square([3,height]);
-}
-
-module hook() {
-    translate([0,4,0])
-        let(rad = 5) {
-        translate([0,rad,rad])
-            cylinder(h=5,r=2,$fn=100);
-
-        rotate([90,0,0])
-            cylinder(h=5,r=2,$fn=100);
-
-        translate([0,0,rad])
-            rotate([0,90,0])
-            rotate_extrude(angle=90, $fn=100)
-
-            translate([rad,0,0])
-            circle(r=2);
-    }
-}
-
-let (num_hooks = 5) {
-    rotate([10,0,0]){
-        translate([-50,130,-32]) {
-            rotate([0,0,180])
-                hook();
-
-            translate([25,0,0])
-                rotate([0,0,180])
-                hook();
-            
-            translate([50,0,0])
-                rotate([0,0,180])
-                hook();
-            
-            translate([75,0,0])
-                rotate([0,0,180])
-                hook();
-            
-            translate([100,0,0])
-                rotate([0,0,180])
-                hook();
-        }
-    }
 }

@@ -1,3 +1,5 @@
+include <hookset.scad>
+
 module holder(height, width, depth) {
     cube([width, 3, height]);
     cube([width, depth, 3]);
@@ -16,35 +18,12 @@ module holder(height, width, depth) {
     }
 }
 
-module hook() {
-    translate([0,4,0])
-        let(rad = 5) {
-        translate([0,rad,rad])
-            cylinder(h=5,r=2,$fn=100);
-
-        rotate([90,0,0])
-            cylinder(h=5,r=2,$fn=100);
-
-        translate([0,0,rad])
-            rotate([0,90,0])
-            rotate_extrude(angle=90, $fn=100)
-
-            translate([rad,0,0])
-            circle(r=2);
-    }
-}
-
 module holder_with_hooks(height, width, depth) {
     holder(height, width, depth);
 
-    translate([(width - 25)/2,0,height - 5]) {
-        rotate([0,0,180])
-            hook();
-
-        translate([25,0,0])
-            rotate([0,0,180])
-            hook();
-    }
+    translate([(width - 25)/2, -10, height - 5])
+        rotate([-90,0,0])
+            hookset(2);
 }
 
 holder_with_hooks(90, 130, 30);
